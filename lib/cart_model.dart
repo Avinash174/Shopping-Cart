@@ -37,7 +37,7 @@ class CartModel {
       'productPrice': productPrice,
       'quantity': quantity,
       'unitTag': unitTag,
-      'img': img,
+      'img': img, 
     };
   }
 }
