@@ -15,7 +15,7 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
-  DBHelper dbHelper = DBHelper();
+  DBHelper? dbHelper = DBHelper();
 
   List<String> productName = [
     "Mango",
@@ -73,7 +73,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             label: Consumer<CartProvider>(
                 builder: (BuildContext context, value, Widget? child) {
               return Text(
-                value.getTotalPrice().toString(),
+                value.getCounter().toString(),
                 style: GoogleFonts.openSans(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -147,7 +147,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    dbHelper
+                                    dbHelper!
                                         .insert(
                                       CartModel(
                                         productId: index.toString(),
