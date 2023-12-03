@@ -119,7 +119,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                   height: height * .01,
                                 ),
                                 Text(
-                                  productUnit[index].toString(),
+                                  productUnit[index].toString() +
+                                      productUnit[index].toString(),
                                   style: GoogleFonts.openSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
