@@ -107,6 +107,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               width: width * .05,
                             ),
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   productName[index].toString(),
@@ -120,10 +122,36 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                 ),
                                 Text(
                                   productUnit[index].toString() +
-                                      productUnit[index].toString(),
+                                      "  " +
+                                      "₹. " +
+                                      productPrice[index].toString(),
                                   style: GoogleFonts.openSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .01,
+                                ),
+                                InkWell(
+                                  child: Container(
+                                    height: height * .045,
+                                    width: width * .25,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadiusDirectional.all(
+                                        Radius.circular(20.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Add to Cart',
+                                        style: GoogleFonts.openSans(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
