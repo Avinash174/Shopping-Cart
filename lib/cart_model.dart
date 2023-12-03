@@ -9,6 +9,7 @@ class CartModel {
   final String? img;
 
   CartModel({
+    required this.id,
     required this.productId,
     required this.productName,
     required this.initialPrice,
@@ -37,7 +38,7 @@ class CartModel {
       'productPrice': productPrice,
       'quantity': quantity,
       'unitTag': unitTag,
-      'img': img, 
+      'img': img,
     };
   }
 }

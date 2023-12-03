@@ -1,5 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:shoping_cart/cart_model.dart';
+import 'package:shoping_cart/cart_provider.dart';
+import 'package:shoping_cart/db_helper.dart';
 
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
@@ -9,6 +15,8 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  DBHelper dbHelper = DBHelper();
+
   List<String> productName = [
     "Mango",
     "Apple",
@@ -45,6 +53,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     final height = MediaQuery.sizeOf(context).height * 1;
     final width = MediaQuery.sizeOf(context).width * 1;
     return Scaffold(
@@ -61,13 +70,16 @@ class _ProductListScreenState extends State<ProductListScreen> {
         actions: [
           Badge(
             backgroundColor: Colors.redAccent,
-            label: Text(
-              '0',
-              style: GoogleFonts.openSans(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            label: Consumer<CartProvider>(
+                builder: (BuildContext context, value, Widget? child) {
+              return Text(
+                value.getTotalPrice().toString(),
+                style: GoogleFonts.openSans(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            }),
             child: const Icon(
               Icons.shopping_bag_outlined,
               color: Colors.white,
@@ -134,6 +146,32 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                   height: height * .01,
                                 ),
                                 InkWell(
+                                  onTap: () {
+                                    dbHelper
+                                        .insert(
+                                      CartModel(
+                                        productId: index.toString(),
+                                        productName:
+                                            productName[index].toString(),
+                                        initialPrice: productPrice[index],
+                                        productPrice: productPrice[index],
+                                        quantity: 1,
+                                        unitTag: productUnit[index],
+                                        img: productImages[index].toString(),
+                                        id: index,
+                                      ),
+                                    )
+                                        .then((value) {
+                                      log('Product Added To Cart');
+                                      cartProvider.addTotalPrice(
+                                        double.parse(
+                                            productPrice[index].toString()),
+                                      );
+                                      cartProvider.addCounter();
+                                    }).onError((error, stackTrace) {
+                                      log(error.toString());
+                                    });
+                                  },
                                   child: Container(
                                     height: height * .045,
                                     width: width * .25,
