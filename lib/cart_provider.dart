@@ -20,6 +20,23 @@ class CartProvider with ChangeNotifier {
     _totalPrice = sharedPreferences.getDouble('total_price') ?? 0.0;
   }
 
+  void addTotalPrice(double productPrice) {
+    _totalPrice = _totalPrice + productPrice;
+    _setPrefItem();
+    notifyListeners();
+  }
+
+  void removeTotalPrice(double productPrice) {
+    _totalPrice = _totalPrice - productPrice;
+    _setPrefItem();
+    notifyListeners();
+  }
+
+  double getTotalPrice() {
+    _getPrefItem();
+    return _totalPrice;
+  }
+
   void addCounter() {
     _counter++;
     _setPrefItem();
@@ -33,7 +50,7 @@ class CartProvider with ChangeNotifier {
   }
 
   int getCounter() {
-    _counter--;
+    _getPrefItem();
     return _counter;
   }
 }
