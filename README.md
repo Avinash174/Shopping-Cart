@@ -1,6 +1,6 @@
-# shoping_cart
+# Shoping Cart
 
-A new Flutter project.
+A New Flutter Shopping Cart Project Using Provider State Management.
 
 ## Getting Started
 
