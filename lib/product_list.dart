@@ -88,21 +88,44 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Image(
                               image: NetworkImage(
                                 productImages[index].toString(),
                               ),
                               height: height * .1,
-                              width: width * .1,
-                            ),
-                            SizedBox(
                               width: width * .2,
                             ),
-                            Text(
-                              productName[index].toString(),
+                            SizedBox(
+                              width: width * .05,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  productName[index].toString(),
+                                  style: GoogleFonts.openSans(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .01,
+                                ),
+                                Text(
+                                  productUnit[index].toString(),
+                                  style: GoogleFonts.openSans(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         )
